@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use('/api/auth', authRouter);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Servidor corriendo exitosamente");
+  res.send("Servidor ejecutando exitosamente");
 });
 
 app.listen(port, () => {
