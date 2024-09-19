@@ -21,5 +21,5 @@ export interface InsertUsuario {
     estado?: boolean,
     tipoPaciente: number,
     tipoUsuario: number,
-    hojaVida: number
+    hojaVida?: number
 }

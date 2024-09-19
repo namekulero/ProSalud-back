@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 
 export async function crearUsuario(datos: DatosUsuario, usuario: InsertUsuario) {
     try {
-        const datosQuery = 'INSERT INTO HOJAS_VIDA SET direccion=?, estadoUsuario=?, telefonoUsuario=?, idEps=?';
+        const datosQuery = 'INSERT INTO HOJAS_VIDA (direccion, estadoUsuario, telefonoUsuario, idEps) VALUES (?, ?, ?, ?);';
         var vivoNumero: number = 1;
         if (!datos.vivo) {
             vivoNumero = 0;
@@ -27,7 +27,7 @@ export async function crearUsuario(datos: DatosUsuario, usuario: InsertUsuario) 
             estado: usuario.estado,
             tipoPaciente: usuario.tipoPaciente,
             tipoUsuario: usuario.tipoUsuario,
-            hojaVida: usuario.hojaVida
+            hojaVida: datosId
         };
 
         const usuarioQuery = 'INSERT INTO USUARIOS SET CC=?, nombreUsuario=?, apellidoUsuario=?, emailUsuario=?, pwdUsuario=?, idSede=?, estadoUsuario=?, idHoja_Vida=?, idTipoPaciente=?, idTipoUsuario=?';

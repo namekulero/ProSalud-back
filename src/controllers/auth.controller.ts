@@ -25,8 +25,7 @@ export const signup = async (req: Request, res: Response) => {
     const claveUsuario = req.body.clave;
     const sedeUsuario: number = 4;
     const estadoUsuario: boolean = true;
-    const hojaUsuario: number = req.body.pwdUser;
-    const tPaciente: number = req.body.siteUser;
+    const tPaciente: number = req.body.tipo;
     const tUsuario: number = 1;
 
     const usuario: InsertUsuario = {
@@ -37,7 +36,6 @@ export const signup = async (req: Request, res: Response) => {
         clave: claveUsuario,
         sede: sedeUsuario,
         estado: estadoUsuario,
-        hojaVida: hojaUsuario,
         tipoPaciente: tPaciente,
         tipoUsuario: tUsuario
     }
