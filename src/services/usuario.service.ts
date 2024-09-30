@@ -48,6 +48,45 @@ export async function crearUsuario(datos: DatosUsuario, usuario: InsertUsuario) 
     }
 }
 
+export async function getUsuarioPorCorreo(email: string): Promise<Usuario | null> {
+    try {
+        const query = 'SELECT * FROM USUARIOS WHERE emailUsuario = ?';
+        const [rows]: any = await conexion.query(query, [email]);
+        if (rows.length > 0) {
+            return rows[0] as Usuario;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error("Error recuperando al usuario: ", error);
+        return null;
+    }
+}
+
+export async function validarClave(clave: string, hash: string): Promise<boolean> {
+    try {
+        return await bcrypt.compare(clave, hash);
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+export async function getUsuarioPorID(id: number): Promise<Usuario | null> {
+    try {
+        const query = 'SELECT * FROM USUARIOS WHERE CC = ?';
+        const [rows]: any = await conexion.query(query, [id]);
+        if (rows.length > 0) {
+            return rows[0] as Usuario;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error("Error recuperando al usuario: ", error);
+        throw error;
+    }
+}
+
 export async function encriptarClave(clave: string): Promise<string> {
     const salt = await bcrypt.genSalt(10);
     return bcrypt.hash(clave, salt);

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { signup, signin, profile } from "../controllers/auth.controller";
 import { TokenValidator } from "../libs/validateToken";
+
 const router : Router = Router();
 
 router
