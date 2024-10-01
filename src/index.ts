@@ -6,12 +6,19 @@ import authRouter from './routes/auth.routes';
 // import historiaRouter from './routes/historia.routes';
 // import ordenRouter from './routes/orden.routes';
 // import autorizacionRouter from './routes/autorizacion.routes';
-import bodyParser from "body-parser";
+
+const https = require('https');
+const fs = require('fs');
+const opciones = {
+  key: fs.readFileSync('./key.pem'),
+  cert: fs.readFileSync('./cert.pem'),
+  passphrase: 'prosalud'
+};
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 // MIDDLEWARE
 app.use(express.json());
@@ -27,6 +34,8 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Servidor ejecutando exitosamente");
 });
 
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
-});
+https
+  .createServer(opciones, app)
+  .listen(port, () => {
+    console.log(`Servidor escuchando en https://localhost:${port}`);
+  });
