@@ -1,15 +1,10 @@
-import { hash } from "crypto";
-import { DatosUsuario } from "../interfaces/DatosUsuario";
-import { InsertUsuario, Usuario } from "../interfaces/Usuario";
 import conexion from "../providers/database";
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { DatosOrden } from "../interfaces/DatosOrden";
 
 
 export async function crearOrdenMedica(datosOrden: DatosOrden) {
     try {
-        const ordenQuery = 'INSERT INTO ORDENES_MEDICAS (idPaciente, descripcion, fecha) VALUES (?, ?, ?);';
+        const ordenQuery = 'INSERT INTO ORDENES_MEDICAS (idCita, estado, descripcion, fecha) VALUES (?,?, ?, ?);';
         const [ordenResultado] = await conexion.query(ordenQuery, [datosOrden.idOrden, datosOrden.descripcion, datosOrden.fecha]);
 
         if (!ordenResultado) {
